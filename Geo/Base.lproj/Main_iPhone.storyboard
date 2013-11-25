@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Message Screen - Geo-->
+        <!--Message Screen - Scenter-->
         <scene sceneID="2kH-Ty-2SC">
             <objects>
                 <viewController id="klj-8l-cjU" customClass="MessageScreen" sceneMemberID="viewController">
@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlQ-fI-ZNu">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlQ-fI-ZNu">
                                 <rect key="frame" x="0.0" y="495" width="320" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.46399297012780316" green="0.81018813775510201" blue="0.082627107194949451" alpha="1" colorSpace="calibratedRGB"/>
@@ -29,15 +29,20 @@
                                     <action selector="refresh:" destination="klj-8l-cjU" eventType="touchUpInside" id="6DZ-w2-MHw"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Fjs-6a-Fyc">
-                                <rect key="frame" x="0.0" y="67" width="320" height="432"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Fjs-6a-Fyc">
+                                <rect key="frame" x="0.0" y="64" width="320" height="431"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IlQ-fI-ZNu" firstAttribute="top" secondItem="Fjs-6a-Fyc" secondAttribute="bottom" id="6D0-V1-UQo"/>
+                            <constraint firstAttribute="bottom" secondItem="IlQ-fI-ZNu" secondAttribute="bottom" id="cwj-yB-xGg"/>
+                            <constraint firstItem="Fjs-6a-Fyc" firstAttribute="top" secondItem="cDs-hf-GdU" secondAttribute="bottom" id="sgX-aX-bZD"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Geo" id="zfc-ku-fRt"/>
+                    <navigationItem key="navigationItem" title="Scenter" id="zfc-ku-fRt"/>
                     <connections>
                         <outlet property="messageTableView" destination="Fjs-6a-Fyc" id="cQh-M5-wcr"/>
                         <segue destination="Byk-tn-h01" kind="push" identifier="messageInfoPush" id="0mp-02-MX7"/>
@@ -47,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="938" y="205"/>
         </scene>
-        <!--Message Info View - Geo-->
+        <!--Message Info View - Scenter-->
         <scene sceneID="A1R-51-Ea9">
             <objects>
                 <viewController id="Byk-tn-h01" customClass="MessageInfoView" sceneMemberID="viewController">
@@ -59,25 +64,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="XAu-Od-Weg">
-                                <rect key="frame" x="20" y="97" width="280" height="115"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="More scents in" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="273" translatesAutoresizingMaskIntoConstraints="NO" id="Zo0-5P-2LZ">
+                                <rect key="frame" x="20" y="182" width="273" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g0s-Ju-jBj">
+                                <rect key="frame" x="5" y="72" width="310" height="102"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Content" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="dtB-ed-q12">
+                                        <rect key="frame" x="20" y="20" width="270" height="62"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cCB-Ks-1p5">
+                                <rect key="frame" x="5" y="240" width="310" height="311"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Geo" id="TAv-hh-tSE">
+                    <navigationItem key="navigationItem" title="Scenter" id="TAv-hh-tSE">
                         <barButtonItem key="backBarButtonItem" title="Home" id="QpK-RR-YM8"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="contentLabel" destination="XAu-Od-Weg" id="JTJ-lv-GZk"/>
+                        <outlet property="contentLabel" destination="dtB-ed-q12" id="tXd-M1-78I"/>
+                        <outlet property="labelBackground" destination="g0s-Ju-jBj" id="fPj-Jz-4Tz"/>
+                        <outlet property="moreScentsLabel" destination="Zo0-5P-2LZ" id="ROL-4W-Cnx"/>
+                        <outlet property="scentsInFenceTable" destination="cCB-Ks-1p5" id="vhi-Sv-Nl4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hbh-bY-iDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1518" y="230"/>
+            <point key="canvasLocation" x="2094" y="205"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1RV-3C-C6p">

@@ -36,7 +36,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    
     locationManager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
     
@@ -86,51 +88,20 @@
     NSDictionary *scent = [_scentsNearby objectAtIndex:selectedPath.item];
     messageInfoController.scent = scent;
     
-    NSDictionary *fence = _fencesWithin[scent[@"fence"]];
-    messageInfoController.fence = fence;
-    messageInfoController.userLocation = _location;
-    
     [_messageTableView deselectRowAtIndexPath:selectedPath animated:YES];
 }
 
  
 - (void) getMessagesNearby
 {
-    if(!_fencesWithin) {
-        _fencesWithin = [[NSMutableDictionary alloc] init];
-    }
-    if(!_scentsNearby) {
-        _scentsNearby = [[NSMutableArray alloc] init];
-    }
-    
-    [_fencesWithin removeAllObjects];
-    [_scentsNearby removeAllObjects];
-    
     NSString *domain = @"http://tritanium.mathcs.emory.edu/scenter/api";
-    NSString *urlString = [NSString stringWithFormat:@"%@/fences/?loc=%f,%f", domain, _location.latitude, _location.longitude];
+    NSString *urlString = [NSString stringWithFormat:@"%@/scents/?loc=%f,%f", domain, _location.latitude, _location.longitude];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
     NSError *jsonParsingError = nil;
-    NSArray *fencesWithinArray = [[NSArray alloc] initWithArray:[NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonParsingError]];
-
-    
-    for(int i = 0; i < [fencesWithinArray count]; i++) {
-        [_fencesWithin setObject:[fencesWithinArray objectAtIndex:i] forKey:[fencesWithinArray objectAtIndex:i][@"id"]];
-    }
-    
-    for(int i = 0; i < [fencesWithinArray count]; i++) {
-        NSDictionary *fence = [fencesWithinArray objectAtIndex:i];
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/scents/%@", domain, fence[@"id"]]];
-        request = [NSURLRequest requestWithURL:url];
-        responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-        
-        NSArray *scentsInThisFence = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonParsingError];
-        for(int j = 0; j < [scentsInThisFence count]; j++) {
-            [_scentsNearby addObject:[scentsInThisFence objectAtIndex:j]];
-        }
-    }
+    self.scentsNearby = [[NSArray alloc] initWithArray:[NSJSONSerialization JSONObjectWithData:responseData options:0 error:&jsonParsingError]];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation

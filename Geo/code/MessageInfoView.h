@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "MapKit/MapKit.h"
 
-@interface MessageInfoView : UIViewController
+@interface MessageInfoView : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property NSDictionary *scent;
 @property NSDictionary *fence;
 @property CLLocationCoordinate2D userLocation;
+
+@property NSArray *scentsInFence;
 
 @end

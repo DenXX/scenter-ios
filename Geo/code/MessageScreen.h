@@ -12,7 +12,6 @@
 @interface MessageScreen : UIViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
 @property CLLocationCoordinate2D location;
-@property NSMutableArray *scentsNearby;
-@property NSMutableDictionary *fencesWithin;
+@property NSArray *scentsNearby;
 
 @end
